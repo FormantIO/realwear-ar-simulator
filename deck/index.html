@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formant × RealWear: AR Fleet Operations</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+    :root {
+      --formant-blue: #1c9fff;
+      --realwear-green: #76b900;
+      --accent-teal: #00d4aa;
+      --dark-bg: #0a0a0f;
+      --dark-surface: #12121a;
+      --dark-card: #1a1a25;
+      --text-primary: #f0f0f5;
+      --text-secondary: #8888aa;
+      --glow-blue: rgba(28, 159, 255, 0.3);
+      --glow-green: rgba(118, 185, 0, 0.3);
+    }
+
+    .reveal {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text-primary);
+    }
+
+    .reveal .slides {
+      text-align: left;
+    }
+
+    .reveal .slides section {
+      background: var(--dark-bg);
+      padding: 40px 60px;
+      height: 100%;
+      display: flex !important;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    /* Global heading styles */
+    .reveal h1, .reveal h2, .reveal h3 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      text-transform: none;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+    }
+
+    .reveal h1 { font-size: 2.8em; line-height: 1.1; }
+    .reveal h2 { font-size: 2.0em; line-height: 1.2; margin-bottom: 0.6em; }
+    .reveal h3 { font-size: 1.3em; line-height: 1.3; color: var(--text-secondary); font-weight: 400; }
+
+    .reveal p {
+      font-size: 1.1em;
+      line-height: 1.6;
+      color: var(--text-secondary);
+      margin-bottom: 0.8em;
+    }
+
+    /* ---- SLIDE: Title ---- */
+    .slide-title {
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .title-logos {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+      margin-bottom: 40px;
+    }
+
+    .title-logos img {
+      height: 48px;
+      filter: brightness(1.1);
+    }
+
+    .title-logos .divider {
+      width: 2px;
+      height: 40px;
+      background: linear-gradient(180deg, transparent, var(--formant-blue), transparent);
+    }
+
+    .slide-title h1 {
+      background: linear-gradient(135deg, var(--formant-blue), var(--accent-teal), var(--realwear-green));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-size: 3.2em;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .slide-title .subtitle {
+      font-size: 1.3em;
+      color: var(--text-secondary);
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .slide-title .demo-badge {
+      display: inline-block;
+      margin-top: 40px;
+      padding: 10px 28px;
+      border: 1px solid rgba(28, 159, 255, 0.4);
+      border-radius: 100px;
+      color: var(--formant-blue);
+      font-size: 0.85em;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: rgba(28, 159, 255, 0.08);
+    }
+
+    /* ---- SLIDE: Problem ---- */
+    .problem-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 20px;
+    }
+
+    .problem-card {
+      background: var(--dark-card);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 16px;
+      padding: 28px;
+      transition: all 0.3s;
+    }
+
+    .problem-card .icon {
+      font-size: 2em;
+      margin-bottom: 12px;
+    }
+
+    .problem-card h4 {
+      font-size: 1.05em;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+
+    .problem-card p {
+      font-size: 0.85em;
+      color: var(--text-secondary);
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    .section-label {
+      font-size: 0.75em;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--formant-blue);
+      margin-bottom: 12px;
+    }
+
+    .section-label.green { color: var(--realwear-green); }
+    .section-label.teal { color: var(--accent-teal); }
+
+    /* ---- SLIDE: Vision ---- */
+    .vision-statement {
+      font-size: 1.8em;
+      font-weight: 300;
+      line-height: 1.5;
+      color: var(--text-primary);
+      max-width: 800px;
+    }
+
+    .vision-statement em {
+      font-style: normal;
+      color: var(--formant-blue);
+      font-weight: 600;
+    }
+
+    .vision-subtext {
+      margin-top: 32px;
+      font-size: 1.05em;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      max-width: 700px;
+    }
+
+    /* ---- SLIDE: Screenshots ---- */
+    .screenshot-slide {
+      padding: 30px 40px !important;
+    }
+
+    .screenshot-container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 16px;
+    }
+
+    .screenshot-container img {
+      max-width: 100%;
+      max-height: 420px;
+      border-radius: 12px;
+      border: 1px solid rgba(28, 159, 255, 0.2);
+      box-shadow: 0 0 60px rgba(28, 159, 255, 0.1), 0 20px 60px rgba(0, 0, 0, 0.5);
+    }
+
+    .screenshot-caption {
+      display: flex;
+      gap: 20px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+
+    .caption-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: 100px;
+      font-size: 0.75em;
+      font-weight: 500;
+      background: rgba(28, 159, 255, 0.1);
+      border: 1px solid rgba(28, 159, 255, 0.2);
+      color: var(--formant-blue);
+    }
+
+    .caption-tag.green {
+      background: rgba(118, 185, 0, 0.1);
+      border-color: rgba(118, 185, 0, 0.2);
+      color: var(--realwear-green);
+    }
+
+    .caption-tag.teal {
+      background: rgba(0, 212, 170, 0.1);
+      border-color: rgba(0, 212, 170, 0.2);
+      color: var(--accent-teal);
+    }
+
+    /* ---- SLIDE: Benefits ---- */
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 24px;
+      margin-top: 24px;
+    }
+
+    .benefit-card {
+      background: linear-gradient(135deg, var(--dark-card), var(--dark-surface));
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 16px;
+      padding: 32px 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .benefit-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+    }
+
+    .benefit-card:nth-child(1)::before {
+      background: linear-gradient(90deg, transparent, var(--formant-blue), transparent);
+    }
+    .benefit-card:nth-child(2)::before {
+      background: linear-gradient(90deg, transparent, var(--accent-teal), transparent);
+    }
+    .benefit-card:nth-child(3)::before {
+      background: linear-gradient(90deg, transparent, var(--realwear-green), transparent);
+    }
+
+    .benefit-card .metric {
+      font-size: 2.8em;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .benefit-card:nth-child(1) .metric { color: var(--formant-blue); }
+    .benefit-card:nth-child(2) .metric { color: var(--accent-teal); }
+    .benefit-card:nth-child(3) .metric { color: var(--realwear-green); }
+
+    .benefit-card h4 {
+      font-size: 1.05em;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin: 12px 0 8px;
+    }
+
+    .benefit-card p {
+      font-size: 0.82em;
+      color: var(--text-secondary);
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    /* ---- SLIDE: Why Us ---- */
+    .partnership-visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      margin: 32px 0;
+    }
+
+    .partner-block {
+      background: var(--dark-card);
+      border-radius: 16px;
+      padding: 32px 40px;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      min-width: 280px;
+    }
+
+    .partner-block img {
+      height: 36px;
+      margin-bottom: 16px;
+      filter: brightness(1.1);
+    }
+
+    .partner-block .tagline {
+      font-size: 0.9em;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+    }
+
+    .partner-block ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      text-align: left;
+    }
+
+    .partner-block ul li {
+      font-size: 0.82em;
+      color: var(--text-primary);
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .partner-block ul li:last-child { border: none; }
+
+    .partner-block.formant { border-top: 3px solid var(--formant-blue); }
+    .partner-block.realwear { border-top: 3px solid var(--realwear-green); }
+
+    .plus-sign {
+      font-size: 2.5em;
+      font-weight: 200;
+      color: var(--text-secondary);
+    }
+
+    .equals-result {
+      text-align: center;
+      margin-top: 8px;
+    }
+
+    .equals-result .label {
+      font-size: 1.4em;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--formant-blue), var(--realwear-green));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ---- SLIDE: CTA ---- */
+    .slide-cta {
+      text-align: center;
+      align-items: center;
+    }
+
+    .slide-cta h1 {
+      font-size: 3.4em;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--formant-blue), var(--accent-teal));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 24px;
+    }
+
+    .slide-cta .cta-sub {
+      font-size: 1.3em;
+      color: var(--text-secondary);
+      font-weight: 300;
+      max-width: 600px;
+      margin: 0 auto 40px;
+      line-height: 1.6;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+    }
+
+    .cta-btn {
+      padding: 14px 36px;
+      border-radius: 100px;
+      font-size: 0.95em;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: inline-block;
+    }
+
+    .cta-btn.primary {
+      background: linear-gradient(135deg, var(--formant-blue), #0080dd);
+      color: white;
+      border: none;
+    }
+
+    .cta-btn.secondary {
+      background: transparent;
+      color: var(--text-primary);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .cta-logos {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 48px;
+      opacity: 0.6;
+    }
+
+    .cta-logos img {
+      height: 32px;
+    }
+
+    /* Slide number styling */
+    .reveal .slide-number {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.6em;
+      color: var(--text-secondary);
+      background: transparent;
+    }
+
+    /* Progress bar */
+    .reveal .progress {
+      height: 3px;
+      background: var(--dark-surface);
+    }
+
+    .reveal .progress span {
+      background: linear-gradient(90deg, var(--formant-blue), var(--realwear-green));
+    }
+
+    /* Navigation arrows */
+    .reveal .controls .navigate-left,
+    .reveal .controls .navigate-right,
+    .reveal .controls .navigate-up,
+    .reveal .controls .navigate-down {
+      color: var(--formant-blue);
+    }
+
+    /* Two-column screenshot layout */
+    .dual-screenshot {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 16px;
+      flex: 1;
+      align-items: center;
+    }
+
+    .dual-screenshot img {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid rgba(28, 159, 255, 0.15);
+      box-shadow: 0 0 40px rgba(28, 159, 255, 0.08), 0 12px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .dual-screenshot .img-label {
+      text-align: center;
+      font-size: 0.75em;
+      color: var(--text-secondary);
+      margin-top: 8px;
+    }
+
+    /* Feature list */
+    .feature-list {
+      list-style: none;
+      padding: 0;
+      margin: 16px 0 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 24px;
+    }
+
+    .feature-list li {
+      font-size: 0.88em;
+      color: var(--text-secondary);
+      padding: 8px 0;
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .feature-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 14px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--formant-blue);
+    }
+
+    .feature-list li:nth-child(even)::before {
+      background: var(--accent-teal);
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- SLIDE 1: Title -->
+      <section class="slide-title">
+        <div class="title-logos">
+          <img src="../public/formant-logo.png" alt="Formant">
+          <div class="divider"></div>
+          <img src="../public/realwear-logo.png" alt="RealWear">
+        </div>
+        <h1>AR Fleet Operations</h1>
+        <div class="subtitle">Augmented Reality for Frontline Robot Management</div>
+        <div class="demo-badge">Interactive Prototype Demo</div>
+      </section>
+
+      <!-- SLIDE 2: The Problem -->
+      <section>
+        <div class="section-label">The Challenge</div>
+        <h2>Frontline Workers Are<br>Flying Blind</h2>
+        <div class="problem-grid">
+          <div class="problem-card">
+            <div class="icon">&#x1F4F1;</div>
+            <h4>Screen Juggling</h4>
+            <p>Workers constantly switch between tablets, phones, and fixed terminals to monitor robot fleets &mdash; taking their eyes off the warehouse floor.</p>
+          </div>
+          <div class="problem-card">
+            <div class="icon">&#x26A0;&#xFE0F;</div>
+            <h4>Delayed Response</h4>
+            <p>Critical alerts buried in dashboards mean minutes lost before a stuck robot or low battery gets attention.</p>
+          </div>
+          <div class="problem-card">
+            <div class="icon">&#x1F504;</div>
+            <h4>Context Switching</h4>
+            <p>Looking away from work to check a screen breaks flow, reduces productivity, and creates safety blind spots.</p>
+          </div>
+          <div class="problem-card">
+            <div class="icon">&#x1F512;</div>
+            <h4>Siloed Data</h4>
+            <p>Robot telemetry lives in one system, warehouse ops in another. No single pane of glass for the person on the floor.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 3: The Vision -->
+      <section>
+        <div class="section-label teal">The Vision</div>
+        <div class="vision-statement">
+          What if workers could see <em>live robot data</em><br>
+          directly in their <em>field of view</em> &mdash;<br>
+          hands-free, voice-controlled,<br>
+          and always in context?
+        </div>
+        <div class="vision-subtext">
+          Formant's cloud robotics platform meets RealWear's industrial head-mounted display. The result: an AR operations layer that puts fleet intelligence exactly where it's needed &mdash; in the worker's line of sight.
+        </div>
+      </section>
+
+      <!-- SLIDE 4: Screenshot - Warehouse AR View -->
+      <section class="screenshot-slide">
+        <div class="section-label">Live Demo</div>
+        <h2>3D Warehouse with AR Overlays</h2>
+        <div class="screenshot-container">
+          <img src="screenshots/03-head-track-left.png" alt="AR warehouse view with robot overlays">
+        </div>
+        <div class="screenshot-caption">
+          <span class="caption-tag">3D Warehouse Environment</span>
+          <span class="caption-tag teal">Floating AR Labels</span>
+          <span class="caption-tag green">Real-Time Telemetry</span>
+          <span class="caption-tag">Head-Tracking Camera</span>
+        </div>
+      </section>
+
+      <!-- SLIDE 5: Screenshot - Fleet Panel & Voice Commands -->
+      <section class="screenshot-slide">
+        <div class="section-label">Live Demo</div>
+        <h2>Fleet Management & Voice Control</h2>
+        <div class="dual-screenshot">
+          <div>
+            <img src="screenshots/07-fleet-status.png" alt="Fleet status panel">
+            <div class="img-label">Fleet Status Panel &mdash; real-time telemetry for all robots</div>
+          </div>
+          <div>
+            <img src="screenshots/08-diagnostics.png" alt="Diagnostics mode">
+            <div class="img-label">Diagnostics Mode &mdash; activated by voice command</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 6: Features -->
+      <section class="screenshot-slide">
+        <div class="section-label green">Live Demo</div>
+        <h2>What the Prototype Demonstrates</h2>
+        <div class="screenshot-container" style="flex: 0;">
+          <img src="screenshots/06-fleet-panel-attempt.png" alt="Full interface" style="max-height: 300px;">
+        </div>
+        <ul class="feature-list">
+          <li>4 simulated AMRs with live telemetry</li>
+          <li>Voice commands: "show fleet status", "zoom robot"</li>
+          <li>AR labels floating above each robot in 3D space</li>
+          <li>Head-tracking camera simulates HMD movement</li>
+          <li>Battery, speed, temperature, payload monitoring</li>
+          <li>Diagnostic mode for detailed robot inspection</li>
+          <li>CRT scanline effects simulating HMD display</li>
+          <li>Real-time fleet status panel with aggregates</li>
+        </ul>
+      </section>
+
+      <!-- SLIDE 7: Key Benefits -->
+      <section>
+        <div class="section-label">Impact</div>
+        <h2>Why AR Fleet Operations Matters</h2>
+        <div class="benefits-grid">
+          <div class="benefit-card">
+            <div class="metric">360&deg;</div>
+            <h4>Shared Situational Awareness</h4>
+            <p>Every worker sees what every robot is doing &mdash; status, location, and alerts &mdash; without leaving their workstation or checking a tablet.</p>
+          </div>
+          <div class="benefit-card">
+            <div class="metric">2&times;</div>
+            <h4>Safer Operations</h4>
+            <p>Eyes stay on the warehouse floor. Alerts appear in peripheral vision. Workers spot issues before they become incidents.</p>
+          </div>
+          <div class="benefit-card">
+            <div class="metric">&lt;5s</div>
+            <h4>Faster Response Time</h4>
+            <p>Voice-activated commands and instant AR overlays mean workers can diagnose and act in seconds, not minutes.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 8: Why Formant × RealWear -->
+      <section>
+        <div class="section-label green">Partnership</div>
+        <h2>Better Together</h2>
+        <div class="partnership-visual">
+          <div class="partner-block formant">
+            <img src="../public/formant-logo.png" alt="Formant">
+            <div class="tagline">Cloud Robotics Platform</div>
+            <ul>
+              <li>Multi-robot fleet management</li>
+              <li>Real-time telemetry & teleoperation</li>
+              <li>Device-agnostic data pipeline</li>
+              <li>Enterprise-grade security</li>
+            </ul>
+          </div>
+          <div class="plus-sign">+</div>
+          <div class="partner-block realwear">
+            <img src="../public/realwear-logo.png" alt="RealWear">
+            <div class="tagline">Industrial Head-Mounted Display</div>
+            <ul>
+              <li>Hands-free wearable computing</li>
+              <li>Voice-controlled interface</li>
+              <li>Built for harsh environments</li>
+              <li>Enterprise Android ecosystem</li>
+            </ul>
+          </div>
+        </div>
+        <div class="equals-result">
+          <div class="label">= The AR Operations Layer for Autonomous Fleets</div>
+        </div>
+      </section>
+
+      <!-- SLIDE 9: Call to Action -->
+      <section class="slide-cta">
+        <h1>Let's Build This<br>Together</h1>
+        <div class="cta-sub">
+          This prototype proves the concept. Now let's bring AR fleet operations to production &mdash; on RealWear hardware, powered by Formant.
+        </div>
+        <div class="cta-buttons">
+          <a class="cta-btn primary" href="https://realwear-ar-simulator.vercel.app/" target="_blank">Try the Live Demo</a>
+          <a class="cta-btn secondary" href="https://formant.io" target="_blank">Learn About Formant</a>
+        </div>
+        <div class="cta-logos">
+          <img src="../public/formant-logo.png" alt="Formant">
+          <img src="../public/realwear-logo.png" alt="RealWear">
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: true,
+      progress: true,
+      controls: true,
+      controlsTutorial: false,
+      center: false,
+      width: 1280,
+      height: 720,
+      margin: 0,
+      transition: 'fade',
+      transitionSpeed: 'fast',
+      backgroundTransition: 'fade',
+    });
+  </script>
+</body>
+</html>

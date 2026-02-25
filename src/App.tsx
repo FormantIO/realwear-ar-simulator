@@ -11,6 +11,8 @@ export default function App() {
   const [loaded, setLoaded] = useState(false)
   const { state, executeCommand, toggleFleetPanel } = useSimulation()
 
+  const handleLoadComplete = useCallback(() => setLoaded(true), [])
+
   const handleFocusRobot = useCallback((id: string | null) => {
     if (id) {
       executeCommand(`zoom ${id}`)
@@ -21,7 +23,7 @@ export default function App() {
 
   return (
     <div className="w-full h-full bg-bg-dark overflow-hidden">
-      <LoadingScreen onComplete={() => setLoaded(true)} />
+      <LoadingScreen onComplete={handleLoadComplete} />
 
       {loaded && (
         <>

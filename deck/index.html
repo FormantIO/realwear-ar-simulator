@@ -529,9 +529,9 @@
       <!-- SLIDE 1: Title -->
       <section class="slide-title">
         <div class="title-logos">
-          <img src="../public/formant-logo.png" alt="Formant">
+          <img src="/formant-logo.png" alt="Formant">
           <div class="divider"></div>
-          <img src="../public/realwear-logo.png" alt="RealWear">
+          <img src="/realwear-logo.png" alt="RealWear">
         </div>
         <h1>AR Fleet Operations</h1>
         <div class="subtitle">Augmented Reality for Frontline Robot Management</div>
@@ -659,7 +659,7 @@
         <h2>Better Together</h2>
         <div class="partnership-visual">
           <div class="partner-block formant">
-            <img src="../public/formant-logo.png" alt="Formant">
+            <img src="/formant-logo.png" alt="Formant">
             <div class="tagline">Cloud Robotics Platform</div>
             <ul>
               <li>Multi-robot fleet management</li>
@@ -670,7 +670,7 @@
           </div>
           <div class="plus-sign">+</div>
           <div class="partner-block realwear">
-            <img src="../public/realwear-logo.png" alt="RealWear">
+            <img src="/realwear-logo.png" alt="RealWear">
             <div class="tagline">Industrial Head-Mounted Display</div>
             <ul>
               <li>Hands-free wearable computing</li>
@@ -696,8 +696,8 @@
           <a class="cta-btn secondary" href="https://formant.io" target="_blank">Learn About Formant</a>
         </div>
         <div class="cta-logos">
-          <img src="../public/formant-logo.png" alt="Formant">
-          <img src="../public/realwear-logo.png" alt="RealWear">
+          <img src="/formant-logo.png" alt="Formant">
+          <img src="/realwear-logo.png" alt="RealWear">
         </div>
       </section>
 
@@ -712,10 +712,12 @@
       progress: true,
       controls: true,
       controlsTutorial: false,
-      center: false,
+      center: true,
       width: 1280,
       height: 720,
-      margin: 0,
+      margin: 0.04,
+      minScale: 0.2,
+      maxScale: 1.0,
       transition: 'fade',
       transitionSpeed: 'fast',
       backgroundTransition: 'fade',
